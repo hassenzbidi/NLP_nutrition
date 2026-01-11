@@ -1,0 +1,5 @@
+outs:
+- md5: a54efd66a4c1ef8f44ad82624d32391d
+  size: 3282
+  hash: md5
+  path: relations_extracted.json
