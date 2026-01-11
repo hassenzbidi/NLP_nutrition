@@ -1,0 +1,5 @@
+outs:
+- md5: 33d56417f58847ebfe582214b4b01898
+  size: 21556
+  hash: md5
+  path: nutrient.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: fd33905f9db2ec16491f02c729bcfa35
+  size: 215581383
+  hash: md5
+  path: food.csv
