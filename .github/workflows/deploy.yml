@@ -7,6 +7,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -34,5 +35,5 @@ jobs:
           acrName: nutrireg1768210400
           containerAppName: nutrition-app-prod
           resourceGroup: npl
+          containerAppEnvironment: env-mlops-workshop   # ✅ CRITIQUE
           imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/nutrition-app:${{ github.sha }}
-          location: francecentral
