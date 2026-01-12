@@ -9,17 +9,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Récupérer le code
+      # 1️⃣ Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2️⃣ Login Azure
+      # 2️⃣ Azure login
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # 3️⃣ Login au registry ACR
+      # 3️⃣ Login to ACR
       - name: Login to ACR
         uses: azure/docker-login@v1
         with:
@@ -27,24 +27,20 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      # 4️⃣ Build et push de l'image Docker
+      # 4️⃣ Build and push Docker image
       - name: Build and Push Image
         run: |
           docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/nutrition-app:${{ github.sha }} .
           docker push ${{ secrets.ACR_LOGIN_SERVER }}/nutrition-app:${{ github.sha }}
 
-      # 5️⃣ Déploiement sur Azure Container Apps
+      # 5️⃣ Deploy to Container App
       - name: Deploy to Container App
         uses: azure/container-apps-deploy-action@v1
         with:
           acrName: nutrireg1768210400
           containerAppName: nutrition_container
           resourceGroup: npl
-          # 🔹 Nouveau nom de l'environnement
-          containerAppEnvironment: nutrition-env-prod
-          location: northeurope
-
+          containerAppEnvironment: env-mlops-workshop
+          location: francecentral
           imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/nutrition-app:${{ github.sha }}
           targetPort: 80
-          createEnvironmentIfNotExists: true
-          logAnalyticsWorkspaceName: workspace-npl
