@@ -1,4 +1,36 @@
+# --- Python ---
 __pycache__/
-.venv/
 *.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# --- MLflow & Tracking (Données locales) ---
+mlflow/
+mlruns/
+mlflow.db
+mlflow.db-journal
+
+# --- Modèles & Gros fichiers (Section 3.3/3.9) ---
+# On ignore le modèle car il est trop lourd pour GitHub (>100MB)
+nutrition_model_final/
+*.gguf
+*.bin
+*.pt
+*.onnx
+
+# --- Données ---
+# Si tes CSV USDA sont gros, décommente la ligne suivante :
+# data/*.csv
+
+# --- Environnement & Sécurité ---
+.env
+.azure/
+.ssh/
+
+# --- OS ---
 .DS_Store
+Thumbs.db

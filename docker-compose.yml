@@ -1,0 +1,48 @@
+services:
+  nutrition-app:
+    build: .
+    image: nutrition-app:v1
+    container_name: nutrition_container
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      # Utilisez l'adresse IP de la passerelle Docker au lieu du nom de service
+      - MLFLOW_TRACKING_URI=http://172.18.0.1:5000
+    depends_on:
+      - mlflow-server
+    restart: always
+    networks:
+      - nutrition-net
+
+  mlflow-server:
+    image: ghcr.io/mlflow/mlflow:latest
+    container_name: mlflow-server
+    command: >
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri sqlite:////mlflow/mlflow.db
+      --default-artifact-root /mlruns
+      --serve-artifacts
+      --cors-allowed-origins="*"
+    environment:
+      # --- AJOUTS CRITIQUES POUR DÉBLOQUER LE 403 ---
+      - MLFLOW_HTTP_SERVER_CHALLENGE_LOCAL_HOST=False
+      - MLFLOW_SERVER_TRUSTED_HOSTS=mlflow-server,localhost,127.0.0.1,nutrition_container
+      # ----------------------------------------------
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlflow:/mlflow
+      - ./mlruns:/mlruns
+    restart: always
+    networks:
+      - nutrition-net
+
+networks:
+  nutrition-net:
+    driver: bridge

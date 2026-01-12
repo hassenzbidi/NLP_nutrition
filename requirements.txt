@@ -1,0 +1,21 @@
+# --- Interface & Data ---
+streamlit
+pandas
+pymupdf>=1.23.0
+PyPDF2>=3.0.0
+
+# --- NLP & Modèles (Mistral GGUF) ---
+# ctransformers est l'outil principal pour charger tes modèles GGUF sur CPU
+ctransformers>=0.2.27
+transformers>=4.40.0
+huggingface-hub
+
+# --- PyTorch (Version CPU Uniquement) ---
+# Note : L'URL --extra-index doit être passée en argument de pip dans le Dockerfile 
+# pour plus de fiabilité, mais nous gardons torch ici pour la compatibilité.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch>=2.0.0 --index-url https://download.pytorch.org/whl/cpu
+
+# --- MLOps & Tracking (Section 3.5) ---
+mlflow
+optuna>=3.0.0
