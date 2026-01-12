@@ -2,7 +2,7 @@ name: Deploy Nutrition App to Azure
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
 
 jobs:
   build-and-deploy:
