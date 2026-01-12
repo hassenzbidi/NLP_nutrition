@@ -33,7 +33,7 @@ jobs:
         uses: azure/container-apps-deploy-action@v1
         with:
           acrName: nutrireg1768210400
-          containerAppName: nutrition-app-prod
+          containerAppName: nutrition_container
           resourceGroup: npl
           containerAppEnvironment: env-mlops-workshop
           # Spécifier la région est crucial pour les politiques Azure
