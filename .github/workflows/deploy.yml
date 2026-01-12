@@ -42,7 +42,8 @@ jobs:
           resourceGroup: npl
           # 🔹 Nouveau nom de l'environnement
           containerAppEnvironment: nutrition-env-prod
-          location: francecentral
+          location: northeurope
+
           imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/nutrition-app:${{ github.sha }}
           targetPort: 80
           createEnvironmentIfNotExists: true
