@@ -34,7 +34,11 @@ jobs:
         with:
           acrName: nutrireg1768210400
           containerAppName: nutrition-app-prod
-          resourceGroup: npl
+          # Utilisation du groupe où se trouve l'environnement
+          resourceGroup: rg-mlops 
           containerAppEnvironment: env-mlops-workshop
-          containerAppEnvironmentResourceGroup: rg-mlops   # 🔥 LA CLÉ
+          # On définit la région pour éviter le blocage des politiques Azure
+          location: westeurope 
           imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/nutrition-app:${{ github.sha }}
+          # Optionnel : si votre port d'écoute n'est pas 80
+          targetPort: 80
