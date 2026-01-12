@@ -35,5 +35,6 @@ jobs:
           acrName: nutrireg1768210400
           containerAppName: nutrition-app-prod
           resourceGroup: npl
-          containerAppEnvironment: env-mlops-workshop   # ✅ CRITIQUE
+          containerAppEnvironment: env-mlops-workshop
+          containerAppEnvironmentResourceGroup: rg-mlops   # 🔥 LA CLÉ
           imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/nutrition-app:${{ github.sha }}
